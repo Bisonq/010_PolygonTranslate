@@ -19,26 +19,24 @@ class Painter extends JPanel implements MouseListener {
     }
 
     public void drawPolygon() {
-        if(this.polygonCoordinates.size() > 2) {
+        if (this.polygonCoordinates.size() > 2) {
             pointsToPolygon = true;
             repaint();
         }
     }
 
-    public void changeScale(int value){
-        if(pointsToPolygon)
+    public void changeScale(int value) {
+        if (pointsToPolygon)
             System.out.println(value);
     }
 
-    public void changeRotate(int value){
-        if(pointsToPolygon)
+    public void changeRotate(int value) {
+        if (pointsToPolygon)
             System.out.println(value);
     }
-
-    public
 
     @Override
-    void paintComponent(Graphics g) {
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
         g2.setColor(Color.BLACK);
@@ -60,7 +58,7 @@ class Painter extends JPanel implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        if(pointsToPolygon){
+        if (pointsToPolygon) {
             pointsToPolygon = false;
             this.polygonCoordinates.clear();
         }
