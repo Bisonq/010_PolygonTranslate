@@ -35,6 +35,30 @@ class Painter extends JPanel implements MouseListener {
             System.out.println(value);
     }
 
+    public FrameCorner getNearestVertex(Point p){
+        FrameCorner min;
+        double lane = 0;
+
+        lane = laneLength(p, FrameCorner.UPPER_LEFT);
+        min = FrameCorner.UPPER_LEFT;
+
+        if(lane > laneLength(p, FrameCorner.UPPER_RIGHT)){
+            lane = laneLength(p, FrameCorner.UPPER_RIGHT);
+            min = FrameCorner.UPPER_RIGHT;
+        }else if(lane > laneLength(p, FrameCorner.BOTTOM_LEFT)){
+            lane = laneLength(p, FrameCorner.BOTTOM_LEFT);
+            min = FrameCorner.BOTTOM_LEFT;
+        }else if(lane > laneLength(p, FrameCorner.BOTTOM_RIGHT)){
+            lane = laneLength(p, FrameCorner.BOTTOM_RIGHT);
+            min = FrameCorner.BOTTOM_RIGHT;
+        }
+        return min;
+    }
+
+    private double laneLength(Point p, FrameCorner fc) {
+        return Math.sqrt(Math.pow(p.getX() - fc.getX(), 2) + Math.pow(p.getY() - fc.getY(), 2));
+    }
+
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
