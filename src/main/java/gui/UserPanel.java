@@ -12,6 +12,7 @@ public class UserPanel {
     private UserPanel(MyFrame frame) {
         this.frame = frame;
         this.painter = new Painter();
+        this.painter.setBounds(200, 0, 400, 400);
         this.setupComponents();
     }
 
@@ -27,6 +28,7 @@ public class UserPanel {
 
         JButton button = new JButton("Draw polygon");
         button.setBounds(10, 210, 140, 25);
+        button.addActionListener((e) -> painter.drawPolygon());
 
         JLabel labelScale = new JLabel("Scale");
         labelScale.setBounds(10, 50, 40, 20);
@@ -38,6 +40,10 @@ public class UserPanel {
         scaleSlider.setPaintTicks(true);
         scaleSlider.setPaintLabels(true);
         scaleSlider.setPaintTrack(true);
+        scaleSlider.addChangeListener(e -> {
+            int res = scaleSlider.getValue();
+            painter.changeScale(res);
+        });
 
         JLabel labelRotate = new JLabel("Rotate");
         labelRotate.setBounds(10, 110, 40, 20);
@@ -49,9 +55,10 @@ public class UserPanel {
         rotateSlider.setPaintTicks(true);
         rotateSlider.setPaintLabels(true);
         rotateSlider.setPaintTrack(true);
-
-        painter.setBounds(200, 0, 400, 400);
-        button.addActionListener((e) -> painter.drawPolygon());
+        rotateSlider.addChangeListener(e -> {
+            int res = rotateSlider.getValue();
+            painter.changeRotate(res);
+        });
 
         panel.add(button);
         panel.add(labelScale);
