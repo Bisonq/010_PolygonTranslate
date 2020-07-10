@@ -6,13 +6,11 @@ import java.awt.*;
 public class UserPanel {
 
     private final MyFrame frame;
-    private final Painter painter;
+    private Painter painter;
     private static final UserPanel panel = new UserPanel(new MyFrame());
 
     private UserPanel(MyFrame frame) {
         this.frame = frame;
-        this.painter = new Painter();
-        this.painter.setBounds(200, 0, 400, 400);
         this.setupComponents();
     }
 
@@ -74,6 +72,9 @@ public class UserPanel {
             int res = translateSlider.getValue();
             painter.changeTranslate(res);
         });
+
+        this.painter = new Painter(scaleSlider, rotateSlider, translateSlider);
+        this.painter.setBounds(200, 0, 400, 400);
 
         panel.add(button);
         panel.add(labelScale);
