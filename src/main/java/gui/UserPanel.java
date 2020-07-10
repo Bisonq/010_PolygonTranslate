@@ -27,7 +27,7 @@ public class UserPanel {
         panel.setLocation(0, 0);
 
         JButton button = new JButton("Draw polygon");
-        button.setBounds(10, 210, 140, 25);
+        button.setBounds(10, 240, 140, 25);
         button.addActionListener((e) -> painter.drawPolygon());
 
         JLabel labelScale = new JLabel("Scale");
@@ -60,11 +60,28 @@ public class UserPanel {
             painter.changeRotate(res);
         });
 
+        JLabel labelTranslate = new JLabel("Translate");
+        labelTranslate.setBounds(10, 170, 60, 20);
+
+        JSlider translateSlider = new JSlider(-10, 10, 0);
+        translateSlider.setBounds(10, 190, 140, 40);
+        translateSlider.setMajorTickSpacing(5);
+        translateSlider.setMinorTickSpacing(1);
+        translateSlider.setPaintTicks(true);
+        translateSlider.setPaintLabels(true);
+        translateSlider.setPaintTrack(true);
+        translateSlider.addChangeListener(e -> {
+            int res = translateSlider.getValue();
+            painter.changeTranslate(res);
+        });
+
         panel.add(button);
         panel.add(labelScale);
         panel.add(scaleSlider);
         panel.add(labelRotate);
         panel.add(rotateSlider);
+        panel.add(labelTranslate);
+        panel.add(translateSlider);
         panel.add(painter);
 
         frame.add(panel);
