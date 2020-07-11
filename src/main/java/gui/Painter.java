@@ -33,13 +33,19 @@ class Painter extends JPanel implements MouseListener {
     public void drawPolygon() {
         if (this.polygonCoordinates.size() > 2) {
             pointsToPolygon = true;
+            scaleSlider.setValue(0);
+            scale = false;
+            rotateSlider.setValue(0);
+            rotate = false;
+            translateSlider.setValue(0);
+            translate = false;
             repaint();
         }
     }
 
     public void changeScale(int value) {
         if (pointsToPolygon) {
-            this.modifyShape = AffineTransform.getScaleInstance(1 + 0.1 * value, 1 + 0.1 * value).createTransformedShape(this.actualShape);
+            this.modifyShape = AffineTransform.getScaleInstance(1 + 0.05 * value, 1 + 0.05 * value).createTransformedShape(this.actualShape);
             this.scale = true;
             rotateSlider.setValue(0);
             translateSlider.setValue(0);
@@ -49,7 +55,7 @@ class Painter extends JPanel implements MouseListener {
 
     public void changeRotate(int value) {
         if (pointsToPolygon) {
-            this.modifyShape = AffineTransform.getRotateInstance(Math.toRadians(36 * value)).createTransformedShape(this.actualShape);
+            this.modifyShape = AffineTransform.getRotateInstance(5 * value * Math.PI / 180).createTransformedShape(this.actualShape);
             this.rotate = true;
             scaleSlider.setValue(0);
             translateSlider.setValue(0);
@@ -59,7 +65,7 @@ class Painter extends JPanel implements MouseListener {
 
     public void changeTranslate(int value) {
         if (pointsToPolygon) {
-            this.modifyShape = AffineTransform.getTranslateInstance(10 * value, -10 * value).createTransformedShape(this.actualShape);
+            this.modifyShape = AffineTransform.getTranslateInstance(11 * value, -11 * value).createTransformedShape(this.actualShape);
             this.translate = true;
             scaleSlider.setValue(0);
             rotateSlider.setValue(0);
@@ -74,9 +80,7 @@ class Painter extends JPanel implements MouseListener {
         g2.setColor(Color.BLACK);
         if (pointsToPolygon) {
             if (scale || rotate || translate) {
-                g2.setTransform(AffineTransform.getTranslateInstance(10, 10));
                 g2.draw(this.modifyShape);
-
             } else {
                 int[] xPoly = new int[this.polygonCoordinates.size()];
                 int[] yPoly = new int[this.polygonCoordinates.size()];

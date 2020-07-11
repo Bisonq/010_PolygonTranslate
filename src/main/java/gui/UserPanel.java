@@ -21,11 +21,11 @@ public class UserPanel {
     private void setupComponents() {
         JPanel panel = new JPanel();
         panel.setLayout(null);
-        panel.setPreferredSize(new Dimension(200, 400));
+        panel.setPreferredSize(new Dimension(200, 600));
         panel.setLocation(0, 0);
 
         JButton button = new JButton("Draw polygon");
-        button.setBounds(10, 240, 140, 25);
+        button.setBounds(10, 260, 140, 25);
         button.addActionListener((e) -> painter.drawPolygon());
 
         JLabel labelScale = new JLabel("Scale");
@@ -74,7 +74,7 @@ public class UserPanel {
         });
 
         this.painter = new Painter(scaleSlider, rotateSlider, translateSlider);
-        this.painter.setBounds(200, 0, 400, 400);
+        this.painter.setBounds(200, 0, 600, 600);
 
         panel.add(button);
         panel.add(labelScale);
